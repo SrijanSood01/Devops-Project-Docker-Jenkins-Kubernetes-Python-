@@ -5,25 +5,26 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/SrijanSood01/Devops-Project-Docker-Jenkins-Kubernetes-Python-'
+                git branch: 'main',
+                url: 'https://github.com/SrijanSood01/Devops-Project-Docker-Jenkins-Kubernetes-Python-.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t srijansood01/python-devops-app:v1 .'
+                bat 'docker build -t srijansood/python-devops-app:v1 .'
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                sh 'docker push srijansood01/python-devops-app:v1'
+                bat 'docker push srijansood/python-devops-app:v1'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/'
+                bat 'kubectl apply -f k8s/'
             }
         }
     }
